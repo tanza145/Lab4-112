@@ -1,0 +1,55 @@
+package lab4;
+
+public class Loan {
+		// Constant for the number of months in a year
+		private final int MONTHS_IN_YEAR = 12;
+		// The amount of the loan
+		private double loanAmount ;
+		//The monthly interest rate
+		private double monthlyInterestRate ;
+		// The number of monthly payments
+		private int numberOfPayments ;
+		//Creates a new Loan object with passed values.
+		public Loan(double Amount, double Rate,int Period) {
+			setAmount(Amount);
+			setRate(Rate);
+			setPeriod(Period);
+		}
+		//Returns the loan amount.
+		public double getAmount() {
+		return loanAmount;
+		}
+		//Returns the loan period in the number of years.
+		public int getPeriod() {
+		return numberOfPayments/MONTHS_IN_YEAR ;
+		}
+		//Returns the annual interest rate = monthly rate * 100 * months-year
+		public double getRate() {
+		return monthlyInterestRate*100*MONTHS_IN_YEAR ;
+		}
+		//Sets the loan amount of this loan.
+		public void setAmount(double amount) {
+		loanAmount = amount ;
+		}
+		//Sets the loan period of this loan in num of months.
+		public void setPeriod(int periodInYears) {
+		numberOfPayments = periodInYears*MONTHS_IN_YEAR;
+		}
+		//Sets the monthly interest rate of this loan.
+		public void setRate(double annualRate) {
+		monthlyInterestRate = annualRate/100/MONTHS_IN_YEAR ;
+		}
+		//Returns the monthly payment
+		public double getMonthlyPayment() {
+			double monthlyPayment;
+			monthlyPayment = (loanAmount*monthlyInterestRate)/(1-Math.pow(1/(1+monthlyInterestRate),numberOfPayments));
+			return monthlyPayment;
+		}
+		//Returns the total payment
+		public double getTotalPayment() {
+			double totalPayment;
+			totalPayment = getMonthlyPayment()*numberOfPayments;
+			return totalPayment;
+		
+		}
+}
